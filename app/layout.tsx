@@ -1,5 +1,6 @@
+import { ConvexClientProvider } from "@/components/provider/ConvexClientProvider";
 import { ThemeProvider } from "@/components/provider/theme-provider";
-import { Navbar } from "@/components/web/navbar";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeToggle } from "@/components/web/theme-toggle";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Vazirmatn } from "next/font/google";
@@ -41,11 +42,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
+          <ConvexClientProvider>
+            <main className="min-h-[calc(100vh-3.75rem)]">{children}</main>
+          </ConvexClientProvider>
           <div className="fixed bottom-4 left-4">
             <ThemeToggle />
           </div>
+          <Toaster dir="rtl" />
         </ThemeProvider>
       </body>
     </html>
