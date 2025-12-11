@@ -48,7 +48,7 @@ export default function RootLayout({
           <div className="fixed bottom-4 left-4">
             <ThemeToggle />
           </div>
-          <Toaster dir="rtl" />
+          <Toaster dir="rtl" closeButton richColors />
         </ThemeProvider>
       </body>
     </html>

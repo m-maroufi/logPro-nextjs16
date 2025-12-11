@@ -4,10 +4,12 @@ import { useConvexAuth } from "convex/react";
 import Link from "next/link";
 import { Button, buttonVariants } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export function Navbar() {
   const { isAuthenticated, isLoading } = useConvexAuth();
-
+  const router = useRouter();
   return (
     <header className="fixed top-0 left-0 right-0 bg-background">
       <div className="container flex items-center gap-7 h-15 justify-between">
@@ -33,7 +35,27 @@ export function Navbar() {
           ) : isAuthenticated ? (
             <Button
               onClick={() => {
-                authClient.signOut({});
+                authClient.signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      toast.success("با موفقیت خارج شدید", {
+                        duration: 3000,
+                        position: "top-center",
+                        richColors: true,
+                        icon: "🥳",
+                      });
+                      router.push("/");
+                    },
+                    onError: () => {
+                      toast.error("خطا در خروج", {
+                        duration: 3000,
+                        position: "top-center",
+                        richColors: true,
+                        icon: "😢",
+                      });
+                    },
+                  },
+                });
               }}
             >
               خروج

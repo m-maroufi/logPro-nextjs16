@@ -25,10 +25,14 @@ import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InboxIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   // form
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -44,8 +48,29 @@ export default function LoginPage() {
     await authClient.signIn.email({
       email: data.email,
       password: data.password,
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("با موفیقت وارد شدید", {
+            duration: 3000,
+            position: "top-center",
+            richColors: true,
+            icon: "🥳",
+          });
+          form.reset();
+          router.replace("/", {
+            scroll: false,
+          });
+        },
+        onError: () => {
+          toast.error("خطا در ورود", {
+            duration: 3000,
+            position: "top-center",
+            richColors: true,
+            icon: "😢",
+          });
+        },
+      },
     });
-    form.reset();
   }
 
   return (

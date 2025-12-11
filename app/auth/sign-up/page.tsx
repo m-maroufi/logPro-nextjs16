@@ -20,14 +20,18 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import { Spinner } from "@/components/ui/spinner";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InboxIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 export default function SignUpPage() {
+  const router = useRouter();
   // form
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -41,12 +45,31 @@ export default function SignUpPage() {
   });
 
   async function onSubmit(data: z.infer<typeof signUpSchema>) {
+    console.log(data);
     await authClient.signUp.email({
       email: data.email,
       name: data.name,
       password: data.password,
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("با موفیقت وارد شدید", {
+            duration: 3000,
+            position: "top-center",
+            richColors: true,
+            icon: "🥳",
+          });
+          router.push("/");
+        },
+        onError: () => {
+          toast.error("خطا در خروج", {
+            duration: 3000,
+            position: "top-center",
+            richColors: true,
+            icon: "😢",
+          });
+        },
+      },
     });
-    form.reset();
   }
 
   return (
@@ -142,10 +165,27 @@ export default function SignUpPage() {
                 </Field>
               )}
             />
-            <Button size={"lg"} tabIndex={4}>
-              {" "}
-              ایحاد حساب
-            </Button>
+            {form.formState.isLoading || form.formState.isSubmitting ? (
+              <>
+                <Button
+                  size={"lg"}
+                  tabIndex={4}
+                  type="button"
+                  disabled={
+                    form.formState.isLoading || form.formState.isSubmitting
+                  }
+                >
+                  <Spinner />
+                  لطفا کمی صبر کنید
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button size={"lg"} tabIndex={4}>
+                  ایجاد حساب کاربری
+                </Button>
+              </>
+            )}
           </FieldGroup>
         </form>
       </CardContent>
