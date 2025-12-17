@@ -8,4 +8,5 @@ export const createBlogSchema = z.object({
   content: z
     .string("متن پست حداقل 50 کارکتر")
     .min(50, "متن پست حداقل 50 کارکتر"),
+  image: z.instanceof(File),
 });
