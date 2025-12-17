@@ -3,6 +3,7 @@
 import { api } from "@/convex/_generated/api";
 import { getToken } from "@/lib/auth-server";
 import { fetchMutation } from "convex/nextjs";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import z from "zod";
 import { createBlogSchema } from "./schemas/blog";
@@ -52,5 +53,6 @@ export async function createBlogAction(data: z.infer<typeof createBlogSchema>) {
       messsage: error instanceof Error ? error.message : String(error),
     };
   }
+  revalidatePath("/blog");
   redirect("/blog");
 }

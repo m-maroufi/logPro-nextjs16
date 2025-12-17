@@ -13,6 +13,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
+export const dynamic = "force-static";
+// 'auto' | 'force-dynamic' | 'error' | 'force-static'
+export const revalidate = 30;
+// false | 0 | number
+
 export default async function BlogPage() {
   return (
     <section className="py-24 container mx-auto ">
@@ -50,7 +55,7 @@ async function LoadBlogList() {
             </CardHeader>
 
             <CardContent className="flex-1">
-              <Link href={post._id} target="_blank">
+              <Link href={`/blog/${post._id}`}>
                 <h2 className="text-lg hover:text-primary line-clamp-1 min-h-[28px]">
                   {post.title}
                 </h2>
@@ -63,9 +68,8 @@ async function LoadBlogList() {
 
             <CardFooter className="mt-auto">
               <Link
-                href={post._id}
+                href={`/blog/${post._id}`}
                 className={`${buttonVariants({ variant: "default" })} w-full`}
-                target="_blank"
               >
                 ادامه مطلب
                 <MoveLeft />

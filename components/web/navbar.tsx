@@ -11,7 +11,7 @@ export function Navbar() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const router = useRouter();
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background">
+    <header className="fixed top-0 left-0 right-0 bg-background z-40">
       <div className="container flex items-center gap-7 h-15 justify-between">
         <Link href="/">
           <h1 className="text-3xl font-bold">
