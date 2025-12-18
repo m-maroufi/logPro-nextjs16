@@ -5,32 +5,15 @@ import { components } from "./_generated/api";
 import { DataModel } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 
-// ساخت baseURL به صورت هوشمند و امن
-const getBaseURL = () => {
-  // اولویت ۱: اگر NEXT_PUBLIC_SITE_URL ست شده باشه (توصیه شده برای Vercel)
-  if (process.env.NEXT_PUBLIC_SITE_URL) {
-    return process.env.NEXT_PUBLIC_SITE_URL;
-  }
-
-  // اولویت ۲: اگر روی Vercel هستیم، از VERCEL_URL استفاده کن
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-
-  // اولویت ۳: لوکال
-  return "http://localhost:3000";
-};
-
-const baseURL = getBaseURL();
-
-// برای trustedOrigins هم همین منطق رو اعمال کن
+// لیست trustedOrigins رو به صورت دستی و کامل بنویس
+// چون توی محیط Convex متغیرهای Vercel مثل VERCEL_URL در دسترس نیستن
 const trustedOrigins = [
-  process.env.CONVEX_SITE_URL || "", // Convex همیشه داره، اما برای اطمینان
-  baseURL, // دامنه اصلی سایت (Vercel یا لوکال)
+  "https://hip-porpoise-533.convex.site", // دامنه Convex (همیشه هست)
+  "https://log-pro-nextjs16.vercel.app", // دامنه اصلی Vercel — مهم!
   "http://localhost:3000", // برای توسعه محلی
-].filter(Boolean); // خالی‌ها رو حذف کن
+  // اگر بعداً دامنه سفارشی اضافه کردی، اینجا هم اضافه کن
+]; // as const اختیاریه اما خوبه
 
-// The component client
 export const authComponent = createClient<DataModel>(components.betterAuth);
 
 export const createAuth = (
@@ -41,8 +24,13 @@ export const createAuth = (
     logger: {
       disabled: optionsOnly,
     },
-    baseURL, // حالا همیشه مقدار معتبر داره
-    trustedOrigins, // لیست کامل و درست
+    // baseURL رو هم هوشمند نگه دار (این قبلاً فیکس شده بود)
+    baseURL:
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.SITE_URL
+        ? `https://${process.env.SITE_URL}`
+        : "http://localhost:3000"),
+    trustedOrigins,
     database: authComponent.adapter(ctx),
     emailAndPassword: {
       enabled: true,
