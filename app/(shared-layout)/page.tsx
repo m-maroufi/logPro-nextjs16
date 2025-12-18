@@ -11,10 +11,9 @@ import { Label } from "@/components/ui/label";
 import { api } from "@/convex/_generated/api";
 import { fetchQuery } from "convex/nextjs";
 import { Github, MoveLeft } from "lucide-react";
+import { cacheLife, cacheTag } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
-import { connection } from "next/server";
-import { Suspense } from "react";
 
 const featuredCategories = [
   { name: "React", description: "مقالات مرتبط با React و اکوسیستم آن." },
@@ -83,9 +82,8 @@ export default function Home() {
       </section>
 
       {/* Latest Posts Section */}
-      <Suspense fallback={<></>}>
-        <LastPostList />
-      </Suspense>
+
+      <LastPostList />
 
       {/* Categories Section */}
       <section className="py-16 bg-muted/50">
@@ -169,10 +167,10 @@ export default function Home() {
   );
 }
 async function LastPostList() {
-  // "use cache";
-  // cacheLife("hours");
-  // cacheTag("last-post");
-  await connection();
+  "use cache";
+  cacheLife("hours");
+  cacheTag("last-post");
+  // await connection();
   const lastPost = await fetchQuery(api.posts.getLatestPosts);
   return (
     <section className="py-16 bg-background">
