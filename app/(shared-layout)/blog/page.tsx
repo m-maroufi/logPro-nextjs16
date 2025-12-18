@@ -9,18 +9,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { fetchQuery } from "convex/nextjs";
 import { MoveLeft } from "lucide-react";
+import { cacheLife, cacheTag } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
+import { connection } from "next/server";
 import { Suspense } from "react";
 
-export const dynamic = "force-static";
-// 'auto' | 'force-dynamic' | 'error' | 'force-static'
-export const revalidate = 30;
+// export const dynamic = "force-static";
+// // 'auto' | 'force-dynamic' | 'error' | 'force-static'
+// export const revalidate = 30;
 // false | 0 | number
 
 export default async function BlogPage() {
   return (
-    <section className="py-24 container mx-auto grid grid-cols-1 space-y-6">
+    <section className="py-24 container mx-auto grid! grid-cols-1 space-y-6">
       <div className="text-center">
         <h1>وبلاگ های ما</h1>
         <p className="text-xl text-muted-foreground">
@@ -37,10 +39,13 @@ export default async function BlogPage() {
 }
 
 async function LoadBlogList() {
-  await new Promise((resolve) => setTimeout(resolve, 4000));
+  // await connection();
+  'use cache';
+  cacheLife("days");
+  cacheTag("blog-posts");
   const data = await fetchQuery(api.posts.getPosts);
   return (
-    <div className="mt-10  max-w-5xl gap-8 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+    <div className="mt-10  max-w-5xl gap-8 w-full grid! grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto">
       {data?.map((post) => (
         <article key={post._id} className="h-full">
           <Card className="pt-0 overflow-hidden h-full flex flex-col">

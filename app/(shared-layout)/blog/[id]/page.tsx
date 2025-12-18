@@ -49,7 +49,6 @@ export default async function PostDetail({ params }: IPostDetail) {
   if (!post) {
     return <NotFoundPost />;
   }
-  console.log(post);
   return (
     <section className="max-w-4xl mx-auto container animate-in fade-in duration-500 relative mt-20 flex! flex-col">
       <Link
