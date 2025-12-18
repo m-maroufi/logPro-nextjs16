@@ -9,7 +9,12 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         port: "",
       },
-        {
+      {
+        protocol: "https",
+        hostname: "avatar.vercel.sh",
+        port: "",
+      },
+      {
         protocol: "https",
         hostname: "quiet-raccoon-409.convex.cloud",
         port: "",
@@ -23,7 +28,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "files.virgool.io",
       },
-      // 
+      // avatar.vercel.sh
       // new URL("https://picsum.photos/**")
     ],
     // remotePatterns: [new URL("https://images.unsplash.com/***")],

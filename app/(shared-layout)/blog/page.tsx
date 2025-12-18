@@ -20,16 +20,18 @@ export const revalidate = 30;
 
 export default async function BlogPage() {
   return (
-    <section className="py-24 container mx-auto ">
+    <section className="py-24 container mx-auto grid grid-cols-1 space-y-6">
       <div className="text-center">
         <h1>وبلاگ های ما</h1>
         <p className="text-xl text-muted-foreground">
           بینش‌ها، افکار و روندهای تیم ما
         </p>
       </div>
-      <Suspense fallback={<SkeletonLoading />}>
-        <LoadBlogList />
-      </Suspense>
+      <div>
+        <Suspense fallback={<SkeletonLoading />}>
+          <LoadBlogList />
+        </Suspense>
+      </div>
     </section>
   );
 }
@@ -38,7 +40,7 @@ async function LoadBlogList() {
   await new Promise((resolve) => setTimeout(resolve, 4000));
   const data = await fetchQuery(api.posts.getPosts);
   return (
-    <div className="mt-10 max-w-5xl gap-8 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+    <div className="mt-10  max-w-5xl gap-8 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto">
       {data?.map((post) => (
         <article key={post._id} className="h-full">
           <Card className="pt-0 overflow-hidden h-full flex flex-col">

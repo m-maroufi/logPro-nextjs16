@@ -20,10 +20,104 @@ const vazirmtn = Vazirmatn({
   variable: "--font-vazirmtn",
   subsets: ["arabic"],
 });
+
 export const metadata: Metadata = {
-  title: "لاگ پرو",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
+  title: {
+    default: "لاگ پرو | وبلاگ حرفه‌ای برنامه‌نویسان فرانت‌اند",
+    template: "%s | لاگ پرو",
+  },
+
   description:
-    "لاگ پرو - وبلاگ جامع برای برنامه نویسان حوزه فرانت اند و تکنولوژی های وب",
+    "لاگ پرو، وبلاگ جامع و تخصصی برای برنامه‌نویسان فرانت‌اند و علاقه‌مندان به تکنولوژی‌های وب. مقالات عمیق و به‌روز درباره React، Next.js، TypeScript، JavaScript مدرن، Tailwind CSS، UI/UX و بهترین پراکتیس‌های توسعه وب.",
+
+  keywords: [
+    "فرانت اند",
+    "برنامه نویسی وب",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "JavaScript",
+    "Tailwind CSS",
+    "وبلاگ برنامه نویسی",
+    "آموزش فرانت اند",
+    "تکنولوژی وب",
+  ],
+
+  authors: [{ name: "لاگ پرو" }],
+  creator: "لاگ پرو",
+  publisher: "لاگ پرو",
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
+  /* =======================
+     Open Graph (Telegram, FB, LinkedIn)
+     ======================= */
+  openGraph: {
+    title: "لاگ پرو | وبلاگ حرفه‌ای فرانت‌اند",
+    description:
+      "مقالات تخصصی React، Next.js و تکنولوژی‌های مدرن وب. آموزش، نکات پیشرفته و بررسی ابزارهای توسعه برای برنامه‌نویسان حرفه‌ای.",
+    // url: "https://logpro.ir", // حتماً دامنه نهایی
+    siteName: "لاگ پرو",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Log Pro - Front-End Development Blog",
+      },
+    ],
+    locale: "fa_IR",
+    type: "website",
+  },
+
+  /* =======================
+     Twitter
+     ======================= */
+  twitter: {
+    card: "summary_large_image",
+    title: "لاگ پرو | وبلاگ حرفه‌ای برنامه‌نویسان فرانت‌اند",
+    description:
+      "آموزش‌ها و مقالات عمیق درباره React، Next.js، TypeScript و توسعه مدرن وب.",
+    images: ["/og-image.jpg"],
+    // creator: "@logpro_ir", // اگه نداشتی می‌تونی حذفش کنی
+  },
+
+  /* =======================
+     Icons (دقیقاً مطابق فایل‌ها)
+     ======================= */
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+
+  manifest: "/site.webmanifest",
+
+  /* =======================
+     SEO Robots
+     ======================= */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+
+  // alternates: {
+  //   canonical: "https://logpro.ir",
+  // },
 };
 
 export default function RootLayout({
@@ -32,7 +126,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="fa" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${vazirmtn.variable} antialiased`}
       >
