@@ -32,21 +32,22 @@ export const createAuth = (
       // The Convex plugin is required for Convex compatibility
       convex(),
     ],
-    trustedOrigins: [
-      process.env.SITE_URL!, // http://localhost:3000
-      process.env.NEXT_PUBLIC_SITE_URL!, // "http://localhost:3000"           // برای دسترسی با IP
-    ],
+    // trustedOrigins: [
+    //   process.env.SITE_URL!, // http://localhost:3000
+    //   process.env.NEXT_PUBLIC_SITE_URL!, // "http://localhost:3000"
+    //   process.env.NEXT_PUBLIC_CONVEX_SITE_URL!, // "http://localhost:3000"           // برای دسترسی با IP
+    // ],
   });
 };
 
 // Example function for getting the current user
 // Feel free to edit, omit, etc.
-export const getCurrentUser = query({
-  args: {},
-  handler: async (ctx) => {
-    return authComponent.getAuthUser(ctx);
-  },
-});
+// export const getCurrentUser = query({
+//   args: {},
+//   handler: async (ctx) => {
+//     return authComponent.getAuthUser(ctx);
+//   },
+// });
 // // You can also just get the authenticated user id as you
 // // normally would from ctx.auth.getUserIdentity
 // export const getForCurrentUser = query({
