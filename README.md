@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Log Pro (لاگ پرو)
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-16-blue?style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v3.3-blue?style=for-the-badge)
+![Convex](https://img.shields.io/badge/Convex-Backend-purple?style=for-the-badge)
+![Better Auth](https://img.shields.io/badge/Better_Auth-Auth%20System-green?style=for-the-badge)
+![PNPM](https://img.shields.io/badge/PNPM-v8-orange?style=for-the-badge)
 
-First, run the development server:
+**سایت رسمی:** [https://log-pro-nextjs16.vercel.app/](https://log-pro-nextjs16.vercel.app/)
+**ریپوزیتوری:** [GitHub](https://github.com/m-maroufi/logPro-nextjs16)
+
+**Log Pro** یک وبلاگ تخصصی در حوزه **فرانت‌اند و طراحی وب** است که مقالات عمیق و به‌روز درباره React، Next.js، TypeScript، Tailwind CSS و دیگر تکنولوژی‌های وب را ارائه می‌دهد.
+
+---
+
+## 🚀 ویژگی‌ها (Features)
+
+| فیچر                     | توضیحات                                                        |
+| ------------------------ | -------------------------------------------------------------- |
+| احراز هویت کامل کاربران  | شامل ثبت‌نام، ورود، مدیریت کاربران با **Better Auth**          |
+| ایجاد وبلاگ جدید         | امکان ایجاد و انتشار پست‌های جدید                              |
+| Next.js 16               | بهره‌گیری از Server/Client Components و caching برای سرعت بهتر |
+| Convex                   | Backend و مدیریت دیتابیس serverless                            |
+| Tailwind CSS & Shadcn/ui | طراحی واکنش‌گرا و مدرن                                         |
+| مدیریت state و UI        | عملیات سریع و بهینه با Next.js 16                              |
+
+---
+
+## 🛠 تکنولوژی‌ها و پکیج‌ها
+
+- **Next.js 16**
+- **React**
+- **TypeScript**
+- **Tailwind CSS & Shadcn/ui**
+- **Convex**
+- **Better Auth**
+- **PNPM**
+
+---
+
+## ⚡ نصب و اجرا
+
+### 1️⃣ نصب وابستگی‌ها
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ راه‌اندازی Convex (Backend)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dlx convex dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- مطمئن شوید که متغیرهای محیطی (`.env`) درست ست شده‌اند (مقادیر مثال زیر را جایگزین مقادیر اصلی کنید):
 
-## Learn More
+```env
+CONVEX_DEPLOYMENT=dev:your-deployment-name
+NEXT_PUBLIC_CONVEX_URL=https://your-deployment.convex.cloud
+NEXT_PUBLIC_CONVEX_SITE_URL=https://your-deployment.convex.site
+SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+BETTER_AUTH_SECRET=YOUR_SECRET_KEY
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3️⃣ اجرای Next.js (Frontend)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- دسترسی به سایت روی: [http://localhost:3000](http://localhost:3000)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 پوشه‌بندی پروژه
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+.
+├─ app/                # Next.js App Router
+├─ components/         # کامپوننت‌های UI و Provider ها
+├─ lib/                # توابع کمکی و auth
+├─ _generated/         # فایل‌های خودکار تولید شده توسط Convex
+├─ public/             # فایل‌های استاتیک
+├─ styles/             # CSS و Tailwind
+├─ package.json
+└─ README.md
+```
+
+---
+
+## 💡 نکات
+
+- پروژه از قابلیت‌های **Server Components و Client Components** Next.js 16 بهره می‌برد تا عملیات رندر و fetch داده‌ها بهینه شود.
+- تمامی کامپوننت‌ها و استایل‌ها **واکنش‌گرا** هستند و برای موبایل و دسکتاپ بهینه شده‌اند.
+- احراز هویت و مدیریت کاربران کاملاً امن و با استفاده از Better Auth انجام شده است.
+
+---
+
+## 🔗 دمو آنلاین
+
+[https://log-pro-nextjs16.vercel.app/](https://log-pro-nextjs16.vercel.app/)
+
+---
+
+## ⭐ پیشنهادات
+
+- اضافه کردن **پشتیبانی از چند کاربر و رول‌های مختلف** برای مدیریت بهتر وبلاگ‌ها
