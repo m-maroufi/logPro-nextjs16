@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "hip-porpoise-533.convex.cloud",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+
       // avatar.vercel.sh
       //images-www.contentful.com blog.logrocket.com a.storyblok.com
       // new URL("https://picsum.photos/**")

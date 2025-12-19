@@ -23,10 +23,7 @@ export function Navbar() {
           <Link href="/blog" className={buttonVariants({ variant: "ghost" })}>
             وبلاگ
           </Link>
-          <Link
-            href="/contact-us"
-            className={buttonVariants({ variant: "ghost" })}
-          >
+          <Link href="/about" className={buttonVariants({ variant: "ghost" })}>
             درباره ما
           </Link>
         </nav>

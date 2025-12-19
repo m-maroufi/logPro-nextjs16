@@ -87,7 +87,7 @@ export default function Home() {
 
       {/* Categories Section */}
       <section className="py-16 bg-muted/50">
-        <div className="container">
+        <div className="container grid gap-8 grid-cols-1">
           <h2 className="text-3xl font-bold mb-8 text-center">دسته‌بندی‌ها</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {featuredCategories.map((category) => (
@@ -174,7 +174,7 @@ async function LastPostList() {
   const lastPost = await fetchQuery(api.posts.getLatestPosts);
   return (
     <section className="py-16 bg-background">
-      <div className="container">
+      <div className="container  grid gap-8 grid-cols-1">
         <h2 className="text-3xl font-bold mb-8 text-center">جدیدترین مطالب</h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {lastPost?.map((post) => (
