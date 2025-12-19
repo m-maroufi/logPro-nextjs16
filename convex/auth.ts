@@ -21,12 +21,6 @@ export const createAuth = (
     logger: {
       disabled: optionsOnly,
     },
-    // یا اگر از environment variable استفاده می‌کنی:
-    trustedOrigins: [
-      process.env.CONVEX_SITE_URL!,
-      process.env.NEXT_PUBLIC_SITE_URL!,
-      "http://localhost:3000",
-    ],
     baseURL: siteUrl,
     database: authComponent.adapter(ctx),
     // Configure simple, non-verified email/password to get started
