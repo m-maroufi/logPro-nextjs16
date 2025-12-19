@@ -5,15 +5,10 @@ import { components } from "./_generated/api";
 import { DataModel } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 
-// لیست trustedOrigins رو به صورت دستی و کامل بنویس
-// چون توی محیط Convex متغیرهای Vercel مثل VERCEL_URL در دسترس نیستن
-const trustedOrigins = [
-  "https://hip-porpoise-533.convex.site", // دامنه Convex (همیشه هست)
-  "https://log-pro-nextjs16.vercel.app", // دامنه اصلی Vercel — مهم!
-  "http://localhost:3000", // برای توسعه محلی
-  // اگر بعداً دامنه سفارشی اضافه کردی، اینجا هم اضافه کن
-]; // as const اختیاریه اما خوبه
+const siteUrl = process.env.SITE_URL!;
 
+// The component client has methods needed for integrating Convex with Better Auth,
+// as well as helper methods for general use.
 export const authComponent = createClient<DataModel>(components.betterAuth);
 
 export const createAuth = (
@@ -21,28 +16,51 @@ export const createAuth = (
   { optionsOnly } = { optionsOnly: false }
 ) => {
   return betterAuth({
+    // disable logging when createAuth is called just to generate options.
+    // this is not required, but there's a lot of noise in logs without it.
     logger: {
       disabled: optionsOnly,
     },
-    // baseURL رو هم هوشمند نگه دار (این قبلاً فیکس شده بود)
-    baseURL:
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      (process.env.SITE_URL
-        ? `https://${process.env.SITE_URL}`
-        : "http://localhost:3000"),
-    trustedOrigins,
+    // یا اگر از environment variable استفاده می‌کنی:
+    trustedOrigins: [
+      process.env.CONVEX_SITE_URL!,
+      process.env.NEXT_PUBLIC_SITE_URL!,
+      "http://localhost:3000",
+    ],
+    baseURL: siteUrl,
     database: authComponent.adapter(ctx),
+    // Configure simple, non-verified email/password to get started
     emailAndPassword: {
       enabled: true,
       requireEmailVerification: false,
     },
-    plugins: [convex()],
+    plugins: [
+      // The Convex plugin is required for Convex compatibility
+      convex(),
+    ],
   });
 };
 
+// Example function for getting the current user
+// Feel free to edit, omit, etc.
 export const getCurrentUser = query({
   args: {},
   handler: async (ctx) => {
     return authComponent.getAuthUser(ctx);
   },
 });
+// // You can also just get the authenticated user id as you
+// // normally would from ctx.auth.getUserIdentity
+// export const getForCurrentUser = query({
+//   args: {},
+//   handler: async (ctx) => {
+//     const identity = await ctx.auth.getUserIdentity();
+//     if (identity === null) {
+//       throw new Error("Not authenticated");
+//     }
+//     return await ctx.db
+//       .query("messages")
+//       .filter((q) => q.eq(q.field("author"), identity.email))
+//       .collect();
+//   },
+// });
