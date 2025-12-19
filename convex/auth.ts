@@ -32,6 +32,10 @@ export const createAuth = (
       // The Convex plugin is required for Convex compatibility
       convex(),
     ],
+    trustedOrigins: [
+      process.env.SITE_URL!, // http://localhost:3000
+      process.env.NEXT_PUBLIC_SITE_URL!, // "http://localhost:3000"           // برای دسترسی با IP
+    ],
   });
 };
 

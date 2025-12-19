@@ -62,7 +62,7 @@ async function LoadBlogList() {
 
             <CardContent className="flex-1">
               <Link href={`/blog/${post._id}`}>
-                <h2 className="text-lg hover:text-primary line-clamp-1 min-h-[28px]">
+                <h2 className="text-lg hover:text-primary line-clamp-1 min-h-7">
                   {post.title}
                 </h2>
               </Link>

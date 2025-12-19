@@ -1,3 +1,4 @@
+import AuthWrapper from "@/components/web/AuthWrapper"; // اضافه شد
 import { ConvexClientProvider } from "@/components/provider/ConvexClientProvider";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -6,16 +7,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Vazirmatn } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 const vazirmtn = Vazirmatn({
   variable: "--font-vazirmtn",
   subsets: ["arabic"],
@@ -29,10 +25,8 @@ export const metadata: Metadata = {
     default: "لاگ پرو | وبلاگ حرفه‌ای برنامه‌نویسان فرانت‌اند",
     template: "%s | لاگ پرو",
   },
-
   description:
     "لاگ پرو، وبلاگ جامع و تخصصی برای برنامه‌نویسان فرانت‌اند و علاقه‌مندان به تکنولوژی‌های وب. مقالات عمیق و به‌روز درباره React، Next.js، TypeScript، JavaScript مدرن، Tailwind CSS، UI/UX و بهترین پراکتیس‌های توسعه وب.",
-
   keywords: [
     "فرانت اند",
     "برنامه نویسی وب",
@@ -45,25 +39,14 @@ export const metadata: Metadata = {
     "آموزش فرانت اند",
     "تکنولوژی وب",
   ],
-
   authors: [{ name: "لاگ پرو" }],
   creator: "لاگ پرو",
   publisher: "لاگ پرو",
-
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-
-  /* =======================
-     Open Graph (Telegram, FB, LinkedIn)
-     ======================= */
+  formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     title: "لاگ پرو | وبلاگ حرفه‌ای فرانت‌اند",
     description:
       "مقالات تخصصی React، Next.js و تکنولوژی‌های مدرن وب. آموزش، نکات پیشرفته و بررسی ابزارهای توسعه برای برنامه‌نویسان حرفه‌ای.",
-    // url: "https://logpro.ir", // حتماً دامنه نهایی
     siteName: "لاگ پرو",
     images: [
       {
@@ -76,22 +59,13 @@ export const metadata: Metadata = {
     locale: "fa_IR",
     type: "website",
   },
-
-  /* =======================
-     Twitter
-     ======================= */
   twitter: {
     card: "summary_large_image",
     title: "لاگ پرو | وبلاگ حرفه‌ای برنامه‌نویسان فرانت‌اند",
     description:
       "آموزش‌ها و مقالات عمیق درباره React، Next.js، TypeScript و توسعه مدرن وب.",
     images: ["/og-image.jpg"],
-    // creator: "@logpro_ir", // اگه نداشتی می‌تونی حذفش کنی
   },
-
-  /* =======================
-     Icons (دقیقاً مطابق فایل‌ها)
-     ======================= */
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -100,31 +74,19 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-
   manifest: "/site.webmanifest",
-
-  /* =======================
-     SEO Robots
-     ======================= */
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
+    googleBot: { index: true, follow: true },
   },
-
-  // alternates: {
-  //   canonical: "https://logpro.ir",
-  // },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="fa" suppressHydrationWarning>
       <body
@@ -138,6 +100,7 @@ export default function RootLayout({
         >
           <ConvexClientProvider>
             <main className="min-h-[calc(100vh-3.75rem)]">{children}</main>
+            <AuthWrapper /> {/* Client Component */}
           </ConvexClientProvider>
           <div className="fixed bottom-4 left-4">
             <ThemeToggle />
