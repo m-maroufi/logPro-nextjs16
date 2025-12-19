@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "a.storyblok.com",
+        hostname: "hip-porpoise-533.convex.cloud",
       },
       // avatar.vercel.sh
       //images-www.contentful.com blog.logrocket.com a.storyblok.com

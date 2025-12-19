@@ -56,5 +56,5 @@ export async function createBlogAction(data: z.infer<typeof createBlogSchema>) {
   updateTag("blog-posts");
   updateTag("last-post");
   // revalidatePath("/blog");
-  return redirect("/blog");
+  redirect("/blog");
 }

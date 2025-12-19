@@ -41,8 +41,8 @@ export default function CreatePage() {
   });
 
   async function onSubmit(values: z.infer<typeof createBlogSchema>) {
-    form.reset();
     await createBlogAction(values);
+    form.reset();
   }
 
   return (
