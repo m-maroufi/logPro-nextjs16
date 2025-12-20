@@ -9,9 +9,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { fetchQuery } from "convex/nextjs";
 import { MoveLeft } from "lucide-react";
-import { cacheLife, cacheTag } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
+import { connection } from "next/server";
 import { Suspense } from "react";
 
 // export const dynamic = "force-static";
@@ -38,10 +38,7 @@ export default async function BlogPage() {
 }
 
 async function LoadBlogList() {
-  // await connection();
-  "use cache";
-  cacheLife("days");
-  cacheTag("blog-posts");
+  await connection();
   const data = await fetchQuery(api.posts.getPosts);
   return (
     <div className="mt-10  max-w-5xl gap-8 w-full grid! grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto">

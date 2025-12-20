@@ -34,7 +34,7 @@ export default function Home() {
       {/* Hero Section با انیمیشن‌های جذاب */}
       <section className="bg-linear-to-b from-background to-muted/50 py-20 md:py-32 overflow-hidden">
         <div className="container">
-          <div className="grid gap-8 md:grid-cols-2 items-center">
+          <div className="grid! gap-8 md:grid-cols-2 items-center">
             <div className="space-y-8">
               <div className="space-y-6 animate-fade-in-up animation-delay-200">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
@@ -87,7 +87,7 @@ export default function Home() {
 
       {/* Categories Section */}
       <section className="py-16 bg-muted/50">
-        <div className="container grid gap-8 grid-cols-1">
+        <div className="container grid! gap-8 grid-cols-1">
           <h2 className="text-3xl font-bold mb-8 text-center">دسته‌بندی‌ها</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {featuredCategories.map((category) => (
@@ -170,11 +170,10 @@ async function LastPostList() {
   "use cache";
   cacheLife("hours");
   cacheTag("last-post");
-  // await connection();
   const lastPost = await fetchQuery(api.posts.getLatestPosts);
   return (
     <section className="py-16 bg-background">
-      <div className="container  grid gap-8 grid-cols-1">
+      <div className="container  grid! gap-8 grid-cols-1">
         <h2 className="text-3xl font-bold mb-8 text-center">جدیدترین مطالب</h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {lastPost?.map((post) => (

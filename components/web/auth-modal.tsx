@@ -29,10 +29,14 @@ export default function AuthModal() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
           <Button size="lg" className="w-full" asChild>
-            <Link href="/auth/login">ورود به حساب</Link>
+            <Link href="/auth/login" onClick={() => setOpen(false)}>
+              ورود به حساب
+            </Link>
           </Button>
           <Button size="lg" variant="outline" className="w-full" asChild>
-            <Link href="/auth/sign-up">ثبت‌نام</Link>
+            <Link href="/auth/sign-up" onClick={() => setOpen(false)}>
+              ثبت‌نام
+            </Link>
           </Button>
         </div>
 
